@@ -23,9 +23,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.render('maintenance.hbs');
-});
+// app.use((req, res, next) => {
+//   res.render('maintenance.hbs');
+// });
 
 //takes the absolute path to the folder we want to present
 //__dirname stores the path to the project directory
@@ -51,6 +51,12 @@ app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'About Page'
   });
+});
+
+app.get('/projects,' (req, res) => {
+  res.render('projects.hbs', {
+    welcomeMessage: 'Projects go here'
+  })
 });
 
 app.get('/bad', (req, res)=> {
