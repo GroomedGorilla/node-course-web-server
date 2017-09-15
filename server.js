@@ -2,12 +2,16 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs'); //filestream?
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
+
+//takes the absolute path to the folder we want to present
+//__dirname stores the path to the project directory
+app.use(express.static(__dirname + '/public'));
 
 //logger
 app.use((req, res, next) => {
@@ -26,10 +30,6 @@ app.use((req, res, next) => {
 // app.use((req, res, next) => {
 //   res.render('maintenance.hbs');
 // });
-
-//takes the absolute path to the folder we want to present
-//__dirname stores the path to the project directory
-app.use(express.static(__dirname + '/public'));
 
 hbs.registerHelper('getCurrentYear', () => {
   return new Date().getFullYear()
@@ -53,10 +53,10 @@ app.get('/about', (req, res) => {
   });
 });
 
-app.get('/projects,' (req, res) => {
+app.get('/projects', (req, res) => {
   res.render('projects.hbs', {
     welcomeMessage: 'Projects go here'
-  })
+  });
 });
 
 app.get('/bad', (req, res)=> {
